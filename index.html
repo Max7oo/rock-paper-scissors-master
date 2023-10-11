@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+
+    <title>Frontend Mentor | Rock, Paper, Scissors</title>
+  </head>
+  <div id="modal-background" style="display: none">
+    <div class="modal">
+      <div class="modal-row">
+        <h2>RULES</h2>
+        <img onclick="rules()" src="./images/icon-close.svg" class="close" />
+      </div>
+      <img src="./images/image-rules.svg" class="rules" />
+    </div>
+  </div>
+  <body>
+    <section id="main_content">
+      <div class="header_box">
+        <div class="header_title">
+          <h2>ROCK</h2>
+          <h2>PAPER</h2>
+          <h2>SCISSORS</h2>
+        </div>
+        <div class="header_score">
+          <h3>SCORE</h3>
+          <h1 id="score_text">0</h1>
+        </div>
+      </div>
+      <div id="options">
+        <div class="row-1">
+          <img
+            src="./images/icon-paper.svg"
+            class="paper"
+            onclick="result('paper')"
+          />
+          <img
+            src="./images/icon-scissors.svg"
+            class="scissors"
+            onclick="result('scissors')"
+          />
+        </div>
+        <div class="row-2">
+          <img
+            src="./images/icon-rock.svg"
+            class="rock"
+            onclick="result('rock')"
+          />
+        </div>
+      </div>
+      <div id="results">
+        <div class="you_picked">
+          <h4>YOU PICKED</h4>
+          <img id="you" src="./images/icon-paper.svg" />
+        </div>
+        <div class="result">
+          <h2 id="outcome">YOU WIN</h2>
+          <button onclick="result('')">PLAY AGAIN</button>
+        </div>
+        <div class="house_picked">
+          <h4>THE HOUSE PICKED</h4>
+          <img id="house" src="./images/icon-rock.svg" />
+        </div>
+      </div>
+    </section>
+  </body>
+  <footer>
+    <button onclick="rules()">RULES</button>
+    <button onclick="clear_local()">CLEAR SCORE</button>
+  </footer>
+</html>
+
+<script>
+  var score_text = document.getElementById("score_text");
+  score_text.innerText = localStorage.getItem("score");
+
+  function result(option) {
+    var x = document.getElementById("options");
+    var y = document.getElementById("results");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+      y.style.display = "none";
+    } else {
+      x.style.display = "none";
+      y.style.display = "flex";
+    }
+
+    var you = document.getElementById("you");
+    if (option == "paper") {
+      you.src = "./images/icon-paper.svg";
+      you.style.border = "40px solid blue";
+    } else if (option == "scissors") {
+      you.src = "./images/icon-scissors.svg";
+      you.style.border = "40px solid orange";
+    } else if (option == "rock") {
+      you.src = "./images/icon-rock.svg";
+      you.style.border = "40px solid red";
+    }
+
+    var house = document.getElementById("house");
+    var house_option = Math.floor(Math.random() * 3);
+    if (house_option == 0) {
+      house.src = "./images/icon-paper.svg";
+      house.style.border = "40px solid blue";
+    } else if (house_option == 1) {
+      house.src = "./images/icon-scissors.svg";
+      house.style.border = "40px solid orange";
+    } else if (house_option == 2) {
+      house.src = "./images/icon-rock.svg";
+      house.style.border = "40px solid red";
+    }
+
+    var outcome = document.getElementById("outcome");
+    var score = localStorage.getItem("score");
+
+    if (option == "paper" && house_option == 0) {
+      outcome.innerText = "DRAW";
+      you.style.boxShadow = "inset 0 10px lightgrey";
+      house.style.boxShadow = "inset 0 10px lightgrey";
+    } else if (option == "paper" && house_option == 1) {
+      score_text.innerText = Number(score) - 1;
+      localStorage.setItem("score", Number(score_text.innerText));
+      outcome.innerText = "YOU LOSE";
+      you.style.boxShadow = "inset 0 10px lightgrey";
+      house.style.boxShadow =
+        "inset 0 10px lightgrey, 0 0 0 100px rgba(255, 255, 255, 0.1), 0 0 0 200px rgba(255, 255, 255, 0.06),0 0 0 300px rgba(255, 255, 255, 0.03)";
+    } else if (option == "paper" && house_option == 2) {
+      score_text.innerText = Number(score) + 1;
+      localStorage.setItem("score", Number(score_text.innerText));
+      outcome.innerText = "YOU WIN";
+      house.style.boxShadow = "inset 0 10px lightgrey";
+      you.style.boxShadow =
+        "inset 0 10px lightgrey, 0 0 0 100px rgba(255, 255, 255, 0.1), 0 0 0 200px rgba(255, 255, 255, 0.06),0 0 0 300px rgba(255, 255, 255, 0.03)";
+    } else if (option == "scissors" && house_option == 0) {
+      score_text.innerText = Number(score) + 1;
+      localStorage.setItem("score", Number(score_text.innerText));
+      outcome.innerText = "WIN";
+      house.style.boxShadow = "inset 0 10px lightgrey";
+      you.style.boxShadow =
+        "inset 0 10px lightgrey, 0 0 0 100px rgba(255, 255, 255, 0.1), 0 0 0 200px rgba(255, 255, 255, 0.06),0 0 0 300px rgba(255, 255, 255, 0.03)";
+    } else if (option == "scissors" && house_option == 1) {
+      outcome.innerText = "DRAW";
+      you.style.boxShadow = "inset 0 10px lightgrey";
+      house.style.boxShadow = "inset 0 10px lightgrey";
+    } else if (option == "scissors" && house_option == 2) {
+      score_text.innerText = Number(score) - 1;
+      localStorage.setItem("score", Number(score_text.innerText));
+      outcome.innerText = "LOSE";
+      you.style.boxShadow = "inset 0 10px lightgrey";
+      house.style.boxShadow =
+        "inset 0 10px lightgrey, 0 0 0 100px rgba(255, 255, 255, 0.1), 0 0 0 200px rgba(255, 255, 255, 0.06),0 0 0 300px rgba(255, 255, 255, 0.03)";
+    } else if (option == "rock" && house_option == 0) {
+      score_text.innerText = Number(score) - 1;
+      localStorage.setItem("score", Number(score_text.innerText));
+      outcome.innerText = "LOSE";
+      you.style.boxShadow = "inset 0 10px lightgrey";
+      house.style.boxShadow =
+        "inset 0 10px lightgrey, 0 0 0 100px rgba(255, 255, 255, 0.1), 0 0 0 200px rgba(255, 255, 255, 0.06),0 0 0 300px rgba(255, 255, 255, 0.03)";
+    } else if (option == "rock" && house_option == 1) {
+      score_text.innerText = Number(score) + 1;
+      localStorage.setItem("score", Number(score_text.innerText));
+      outcome.innerText = "WIN";
+      house.style.boxShadow = "inset 0 10px lightgrey";
+      you.style.boxShadow =
+        "inset 0 10px lightgrey, 0 0 0 100px rgba(255, 255, 255, 0.1), 0 0 0 200px rgba(255, 255, 255, 0.06),0 0 0 300px rgba(255, 255, 255, 0.03)";
+    } else if (option == "rock" && house_option == 2) {
+      outcome.innerText = "DRAW";
+      you.style.boxShadow = "inset 0 10px lightgrey";
+      house.style.boxShadow = "inset 0 10px lightgrey";
+    }
+  }
+
+  function rules() {
+    var x = document.getElementById("modal-background");
+    if (x.style.display == "none") {
+      x.style.display = "flex";
+    } else {
+      x.style.display = "none";
+    }
+  }
+
+  function clear_local() {
+    localStorage.setItem("score", "0");
+    score_text.innerText = "0";
+  }
+</script>

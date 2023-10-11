@@ -1,0 +1,241 @@
+@font-face {
+    font-family: Barlow-Medium;
+    src: url(./design/Barlow_Semi_Condensed/BarlowSemiCondensed-Medium.ttf);
+}
+
+@font-face {
+    font-family: Barlow-Regular;
+    src: url(./design/Barlow_Semi_Condensed/BarlowSemiCondensed-Regular.ttf);
+}
+  
+
+html {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    background: radial-gradient(circle at top, hsl(214, 47%, 23%), hsl(237, 49%, 15%));
+}
+
+h1 {
+    font-size: 10em;
+    font-weight: 700;
+    font-family: Barlow-Medium;
+    line-height: 0.85;
+    color: hsl(229, 25%, 31%);
+    margin: 0;
+}
+
+h2 {
+    font-size: 4em;
+    font-weight: 700;
+    font-family: Barlow-Medium;
+    color: white;
+    margin: 0;
+}
+
+h3 {
+    font-size: 2em;
+    font-weight: 600;
+    font-family: Barlow-Regular;
+    color: hsl(229, 64%, 46%);
+    margin: 0;
+}
+
+h4 {
+    font-size: 3em;
+    font-weight: 600;
+    font-family: Barlow-Regular;
+    color: white;
+    margin: 0;
+    margin-bottom: 100px;
+}
+
+#main_content {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.header_box {
+    margin: 100px 0 100px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 50px;
+    border: 3px solid hsl(217, 16%, 45%);
+    border-radius: 30px;
+}
+
+.header_score {
+    background-color: white;
+    padding: 25px;
+    width: 150px;
+    text-align: center;
+    border-radius: 20px;
+}
+
+#options {
+    width: 60%;
+    height: 650px;
+    margin: 0px auto;
+    background-image: url(./images/bg-triangle.svg);
+    background-repeat: no-repeat;
+    background-size: 450px;
+    background-position: center;
+}
+
+.row-1 {
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 150px;
+}
+
+.row-2 {
+    display: flex;
+    justify-content: center;
+    margin-top: 70px;
+}
+
+.paper, .scissors, .rock {
+    background-color: white;
+    height: 100px;
+    padding: 50px;
+    box-shadow: inset 0 10px lightgrey;
+    border-radius: 50%;
+    transition: 0.25s;
+}
+
+.paper:hover, .scissors:hover, .rock:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transform-origin: center;
+}
+
+.paper {
+    border: 30px solid blue;
+}
+
+.scissors {
+    border: 30px solid orange;
+}
+
+.rock {
+    border: 30px solid red;
+}
+
+#results {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    display: none;
+}
+
+.you_picked, .house_picked, .result {
+    text-align: center;
+    position: relative;
+}
+
+.you_picked img {
+    background-color: white;
+    height: 200px;
+    padding: 100px;
+    box-shadow: inset 0 10px lightgrey;
+    border-radius: 50%;
+}
+
+.house_picked img {
+    background-color: white;
+    height: 200px;
+    padding: 100px;
+    box-shadow: inset 0 10px lightgrey;
+    border-radius: 50%;
+    border: 40px solid blue;
+}
+
+.result button {
+    font-family: Barlow-Medium;
+    font-size: 1.5em;
+    color: hsl(229, 25%, 31%);
+    
+    padding: 20px 75px;
+    margin-top: 25px;
+
+    background-color: white;
+    border: 3px solid white;
+    border-radius: 10px;
+}
+
+.result button:hover {
+    color: white;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: end;
+    gap: 25px;
+    margin: 50px;
+}
+
+footer button {
+    font-family: Barlow-Regular;
+    font-size: 1.5em;
+    color: white;
+
+    padding: 10px 50px;
+
+    background-color: transparent;
+    border: 3px solid white;
+    border-radius: 10px;
+}
+
+footer button:hover {
+    background-color: white;
+    color: hsl(229, 25%, 31%);
+    cursor: pointer;
+}
+
+#modal-background {
+    position: absolute;
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100vh;
+    width: 100vw;
+    margin-top: -100px;
+}
+
+.modal {
+    background-color: white;
+    padding: 50px;
+    border-radius: 20px;
+}
+
+.modal-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.modal h2 {
+    color: hsl(229, 25%, 31%);
+}
+
+.close {
+    height: 50px;
+    cursor: pointer;
+}
+
+.rules {
+    height: 500px;
+}
